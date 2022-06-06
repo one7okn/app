@@ -7,7 +7,7 @@
 :root {
     --color1: #000000;
     --color2: #ffffff;
-    --color3: #d02561;
+    --color3: #0f85cc;
     --color4: #1E2124;
     --color5: #707070;
 }
@@ -120,7 +120,7 @@ a .btn {
 }
 
 .hero .logo .logo__img {
-    width: 60px;
+    width: 380px;
     margin-right: 20px;
 }
 
@@ -282,6 +282,10 @@ a .btn {
 
 /* Responsive */
 @media all and (max-width: 767px) {
+    .hero .logo .logo__img {
+        width: 180px;
+    }
+
     .hero .heroD {
         display: none;
     }
