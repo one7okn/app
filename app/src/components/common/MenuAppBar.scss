@@ -1,0 +1,25 @@
+.AppBar {
+  background-image: none;
+  background-color: black;
+
+  .AppBar__Toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    .AppBar__Toolbar__img {
+      width: 380px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+/* Responsive */
+@media all and (max-width: 767px) {
+  .AppBar {
+    .AppBar__Toolbar {
+      .AppBar__Toolbar__img {
+        width: 180px;
+      }
+    }
+  }
+}
