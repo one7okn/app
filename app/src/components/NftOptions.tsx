@@ -1,5 +1,4 @@
-import { Fab, Grid } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import { Grid } from "@mui/material";
 import { FC } from "react";
 import { INftOptionSummary } from "../models";
 import { NftOption } from "./NftOption";
@@ -13,9 +12,6 @@ export const NftOptions: FC<NftOptionsProp> = (props) => {
 
   return (
     <div>
-      <Fab color="primary" aria-label="add">
-        <AddIcon />
-      </Fab>
       <Grid container spacing={2}>
         {nftOptions.map((nftOption: INftOptionSummary) => {
           return <NftOption nftOption={nftOption} key={nftOption.tokenId} />;

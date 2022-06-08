@@ -6,8 +6,6 @@ import { getNftOptions } from "./services";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import MenuAppBar from "./components/common/MenuAppBar";
 
-const pages = ["Products", "Pricing", "Blog"];
-
 function App() {
   const [nftOptions, setNftOptions] = useState<INftOptionSummary[]>();
 
