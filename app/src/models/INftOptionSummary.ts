@@ -1,9 +1,9 @@
 export interface INftOptionSummary {
   tokenId: string;
+  collection: string;
   urlNftOption: string;
   urlNftImage: string;
-  collection: string;
   strikePrice: number;
   amount: number;
-  term: Date;
+  expirationDate: Date;
 }

@@ -1,72 +1,55 @@
-import { INftOptionSummary } from "../models";
+import { INftOptionSummary, NftOption } from "../models";
+import { ethers } from "ethers";
+import NftOptionContract from "../artifacts/contracts/Option.sol/Option.json";
+
+declare var window: any;
+let NftOptionAddress = "0x610178dA211FEF7D417bC0e6FeD39F05609AD788";
 
 export const getNftOptions = async (): Promise<INftOptionSummary[]> => {
-  return [
-    {
-      tokenId: "1",
-      urlNftOption:
-        "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
-      urlNftImage:
-        "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
-      collection: "toto",
-      strikePrice: 50,
-      amount: 0.1,
-      term: new Date()
-    },
-    {
-      tokenId: "2",
-      urlNftOption:
-        "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
-      urlNftImage:
-        "https://m.media-amazon.com/images/M/MV5BZDEyN2NhMjgtMjdhNi00MmNlLWE5YTgtZGE4MzNjMTRlMGEwXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_FMjpg_UX1000_.jpg",
-      collection: "toto",
-      strikePrice: 50,
-      amount: 0.1,
-      term: new Date()
-    },
-    {
-      tokenId: "3",
-      urlNftOption:
-        "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
-      urlNftImage:
-        "https://m.media-amazon.com/images/M/MV5BZDEyN2NhMjgtMjdhNi00MmNlLWE5YTgtZGE4MzNjMTRlMGEwXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_FMjpg_UX1000_.jpg",
-      collection: "toto",
-      strikePrice: 50,
-      amount: 0.1,
-      term: new Date()
-    },
-    {
-      tokenId: "4",
-      urlNftOption:
-        "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
-      urlNftImage:
-        "https://m.media-amazon.com/images/M/MV5BZDEyN2NhMjgtMjdhNi00MmNlLWE5YTgtZGE4MzNjMTRlMGEwXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_FMjpg_UX1000_.jpg",
-      collection: "toto",
-      strikePrice: 50,
-      amount: 0.1,
-      term: new Date()
-    },
-    {
-      tokenId: "5",
-      urlNftOption:
-        "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
-      urlNftImage:
-        "https://m.media-amazon.com/images/M/MV5BZDEyN2NhMjgtMjdhNi00MmNlLWE5YTgtZGE4MzNjMTRlMGEwXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_FMjpg_UX1000_.jpg",
-      collection: "toto",
-      strikePrice: 50,
-      amount: 0.1,
-      term: new Date()
-    },
-    {
-      tokenId: "6",
-      urlNftOption:
-        "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
-      urlNftImage:
-        "https://m.media-amazon.com/images/M/MV5BZDEyN2NhMjgtMjdhNi00MmNlLWE5YTgtZGE4MzNjMTRlMGEwXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_FMjpg_UX1000_.jpg",
-      collection: "toto",
-      strikePrice: 50,
-      amount: 0.1,
-      term: new Date()
+  if (typeof window.ethereum !== "undefined") {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const contract = new ethers.Contract(NftOptionAddress, NftOptionContract.abi, provider);
+    try {
+      const nftOptions = await contract.getNftOptions();
+      return nftOptions.map((nftOption: any) => ({
+        ...nftOption,
+        strikePrice: nftOption.strikePrice.toNumber(),
+        amount: nftOption.amount.toNumber(),
+        expirationDate: new Date(nftOption.expirationDate * 1000)
+      }));
+    } catch (err) {
+      console.log(err);
     }
-  ];
+  }
+
+  return [];
+};
+
+export const createNftOption = async (nftOption: NftOption): Promise<void> => {
+  if (typeof window.ethereum !== "undefined") {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(NftOptionAddress, NftOptionContract.abi, signer);
+    try {
+      const transaction = await contract.createNftOption(
+        {
+          tokenId: 0, //Caculate by the contract
+          collection: nftOption.collection,
+          urlNftOption: nftOption.urlNftOption,
+          urlNftImage: nftOption.urlNftImage,
+          strikePrice: nftOption.strikePrice,
+          amount: nftOption.amount,
+          expirationDate: nftOption.expirationDate
+            ? Math.floor(nftOption.expirationDate.getTime() / 1000)
+            : null
+        },
+        {
+          from: await signer.getAddress()
+        }
+      );
+      await transaction.wait();
+    } catch (err) {
+      console.log(err);
+    }
+  }
 };

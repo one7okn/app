@@ -4,16 +4,19 @@ import { NftOptions, Spinner } from "./components";
 import { INftOptionSummary } from "./models";
 import { getNftOptions } from "./services";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-import MenuAppBar from "./components/common/MenuAppBar";
+import { MenuAppBar } from "./components";
 
 function App() {
   const [nftOptions, setNftOptions] = useState<INftOptionSummary[]>();
 
   useEffect(() => {
-    getNftOptions().then((nftOptionSummaries: INftOptionSummary[]) => {
-      setNftOptions(nftOptionSummaries);
-    });
+    fetchData();
   }, []);
+
+  async function fetchData() {
+    const nftOptionSummaries: INftOptionSummary[] = await getNftOptions();
+    setNftOptions(nftOptionSummaries);
+  }
 
   const darkTheme = createTheme({
     palette: {
@@ -40,7 +43,7 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <main className="App">
-        <MenuAppBar />
+        <MenuAppBar fetchData={fetchData} />
         <NftOptions nftOptions={nftOptions} />
       </main>
     </ThemeProvider>

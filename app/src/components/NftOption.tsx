@@ -39,7 +39,7 @@ export const NftOption: FC<NftOptionProp> = (props) => {
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Collection: {nftOption.collection}
-              Term: {nftOption.term.getDate()}
+              Expiration Date: {nftOption.expirationDate.getDate()}
             </Typography>
           </CardContent>
         </CardActionArea>
