@@ -13,14 +13,14 @@ import {
   Stack,
   TextField
 } from "@mui/material";
-import { ChangeEvent, isValidElement, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { NftOption } from "../../models/NftOption";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { ethers } from "ethers";
-import NftGame from "./artifacts/contracts/NftGame.sol/NftGame.json";
+// import NftGame from "./artifacts/contracts/NftGame.sol/NftGame.json";
 
-let NftGameAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+// let NftGameAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
 
 export default function CreateOption() {
   const [open, setOpen] = useState(false);
@@ -59,22 +59,22 @@ export default function CreateOption() {
     e.preventDefault();
     setIsSubmit(true);
     if (isValid()) {
-      if (typeof window.ethereum !== "undefined") {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const contract = new ethers.Contract(NftGameAddress, NftGame.abi, provider.getSigner());
-        try {
-          const transaction = await contract.mint(type, {
-            from: await signer.getAddress(),
-            value: cost
-          });
-          await transaction.wait();
-          setSuccess("Votre combatant a bien était créer ! ");
-          fetchData();
-        } catch (err) {
-          setError("Une erreur est survenue.");
-        }
-      }
+      // if (typeof window.ethereum !== "undefined") {
+      //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+      //   const signer = provider.getSigner();
+      //   const contract = new ethers.Contract(NftGameAddress, NftGame.abi, provider.getSigner());
+      //   try {
+      //     const transaction = await contract.mint(type, {
+      //       from: await signer.getAddress(),
+      //       value: cost
+      //     });
+      //     await transaction.wait();
+      //     setSuccess("Votre combatant a bien était créer ! ");
+      //     fetchData();
+      //   } catch (err) {
+      //     setError("Une erreur est survenue.");
+      //   }
+      // }
       setNftOption(new NftOption());
       closeDialog();
     }
