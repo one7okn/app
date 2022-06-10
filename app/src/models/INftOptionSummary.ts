@@ -6,4 +6,5 @@ export interface INftOptionSummary {
   strikePrice: number;
   amount: number;
   expirationDate: Date;
+  purcharser: string;
 }

@@ -43,7 +43,7 @@ export const CreateNftOption: FC<CreateNftOptionProps> = (props) => {
   };
 
   const dateChange = (value: Date | null): void => {
-    setNftOption((prev) => ({ ...prev, ["expirationDate"]: value }));
+    setNftOption((prev) => ({ ...prev, expirationDate: value }));
   };
 
   function isValid(): boolean {
@@ -84,6 +84,15 @@ export const CreateNftOption: FC<CreateNftOptionProps> = (props) => {
                 <MenuItem value="troll-town.wtf">troll-town.wtf</MenuItem>
               </Select>
             </FormControl>
+            <TextField
+              type="url"
+              label="Url NFT"
+              value={nftOption.urlNftOption}
+              name="urlNftOption"
+              required
+              error={isSubmit && nftOption.urlNftOption === ""}
+              onChange={handleChange}
+            />
             <TextField
               type="url"
               label="Url NFT picture"

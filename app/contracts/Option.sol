@@ -3,10 +3,13 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "hardhat/console.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract Option is ERC721Enumerable, Ownable {
-    uint nextId = 0;
+    using Counters for Counters.Counter;
+
+    //Id of the next NFT to mint
+    Counters.Counter private _nftIdCounter;
 
     struct NftOption {
         uint tokenId;
@@ -16,6 +19,7 @@ contract Option is ERC721Enumerable, Ownable {
         uint strikePrice;
         uint amount;
         uint256 expirationDate;
+        address purcharser;
     }
 
     mapping(uint => NftOption) private _options;
@@ -28,7 +32,8 @@ contract Option is ERC721Enumerable, Ownable {
             "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
             50,
             1,
-            block.timestamp + 90 days));
+            block.timestamp + 30 days,
+            address(0)));
 
         createNftOption(NftOption(
             0, 
@@ -37,7 +42,8 @@ contract Option is ERC721Enumerable, Ownable {
             "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
             50,
             1,
-            block.timestamp + 30 days));
+            block.timestamp + 30 days,
+            address(0)));
 
         createNftOption(NftOption(
             0, 
@@ -46,7 +52,8 @@ contract Option is ERC721Enumerable, Ownable {
             "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
             50,
             1,
-            block.timestamp + 30 days));
+            block.timestamp + 30 days,
+            msg.sender));
 
         createNftOption(NftOption(
             0, 
@@ -55,7 +62,8 @@ contract Option is ERC721Enumerable, Ownable {
             "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
             50,
             1,
-            block.timestamp + 30 days));
+            block.timestamp + 30 days,
+            msg.sender));
 
         createNftOption(NftOption(
             0, 
@@ -64,7 +72,8 @@ contract Option is ERC721Enumerable, Ownable {
             "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
             50,
             1,
-            block.timestamp + 30 days));
+            block.timestamp + 30 days,
+            msg.sender));
 
         createNftOption(NftOption(
             0, 
@@ -73,7 +82,8 @@ contract Option is ERC721Enumerable, Ownable {
             "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
             50,
             1,
-            block.timestamp + 30 days));
+            block.timestamp + 30 days,
+            msg.sender));
 
         createNftOption(NftOption(
             0, 
@@ -82,22 +92,34 @@ contract Option is ERC721Enumerable, Ownable {
             "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
             50,
             1,
-            block.timestamp + 30 days));
+            block.timestamp + 30 days,
+            msg.sender));
     }
 
+//toto external
     function createNftOption(NftOption memory _option) public payable {
-        _option.tokenId = nextId;
-        _options[nextId] = _option;
-        _safeMint(msg.sender, nextId);
-        nextId++;
+        _option.tokenId = _nftIdCounter.current();
+        _options[_nftIdCounter.current()] = _option;
+        _safeMint(msg.sender, _nftIdCounter.current());
+        _nftIdCounter.increment();
     }
 
-    function getNftOptions() public view returns(NftOption[] memory) {
-        NftOption[] memory options = new NftOption[](nextId);
-        for (uint index = 0; index < nextId; index++) {
+    function getNftOptions() external view returns(NftOption[] memory) {
+        NftOption[] memory options = new NftOption[](_nftIdCounter.current());
+        for (uint index = 0; index < _nftIdCounter.current(); index++) {
             options[index] = _options[index];
         }
 
         return options;      
+    }
+
+    function purchaseNftOption(uint _tokenId) external {
+        require(_options[_tokenId].purcharser == address(0), "You cannot purchase a contract alaready purchased.");
+        _options[_tokenId].purcharser = msg.sender;
+    }
+
+    function executeNftOption(uint _tokenId) external {
+        require(ownerOf(_tokenId) == msg.sender, "You cannot execute a option.");
+        _options[_tokenId].purcharser = msg.sender;
     }
 }

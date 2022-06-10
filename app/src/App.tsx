@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import "./App.scss";
 import { NftOptions, Spinner } from "./components";
 import { INftOptionSummary } from "./models";
-import { getNftOptions } from "./services";
+import { getMyAddress, getNftOptions } from "./services";
 import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { MenuAppBar } from "./components";
 
 function App() {
   const [nftOptions, setNftOptions] = useState<INftOptionSummary[]>();
+  const [myAddress, setMyAddress] = useState("");
 
   useEffect(() => {
+    getMyAddress().then((myAddress) => setMyAddress(myAddress));
     fetchData();
   }, []);
 
@@ -44,7 +46,7 @@ function App() {
       <CssBaseline />
       <main className="App">
         <MenuAppBar fetchData={fetchData} />
-        <NftOptions nftOptions={nftOptions} />
+        <NftOptions nftOptions={nftOptions} myAddress={myAddress} fetchData={fetchData} />
       </main>
     </ThemeProvider>
   );
