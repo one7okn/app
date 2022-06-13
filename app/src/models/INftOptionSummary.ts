@@ -1,5 +1,6 @@
 export interface INftOptionSummary {
   tokenId: string;
+  owner: string;
   collection: string;
   urlNftOption: string;
   urlNftImage: string;

@@ -12,7 +12,7 @@ import {
 import { FC } from "react";
 import { INftOptionSummary } from "../models";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import { address0, purchaseNftOption } from "../services";
+import { address0, executeNftOption, purchaseNftOption } from "../services";
 
 export interface NftOptionProp {
   nftOption: INftOptionSummary;
@@ -26,6 +26,12 @@ export const NftOption: FC<NftOptionProp> = (props) => {
   const purchase = async (e: any) => {
     e.preventDefault();
     await purchaseNftOption(nftOption.tokenId);
+    fetchData();
+  };
+
+  const execute = async (e: any) => {
+    e.preventDefault();
+    await executeNftOption(nftOption.tokenId);
     fetchData();
   };
 
@@ -60,8 +66,8 @@ export const NftOption: FC<NftOptionProp> = (props) => {
             color="primary"
             variant="contained"
             fullWidth={true}
-            disabled={nftOption.purcharser !== myAddress}
-            onClick={purchase}>
+            disabled={nftOption.purcharser === address0 || nftOption.owner !== myAddress}
+            onClick={execute}>
             Execute
           </Button>
           <Button
@@ -69,7 +75,7 @@ export const NftOption: FC<NftOptionProp> = (props) => {
             color="primary"
             variant="contained"
             fullWidth={true}
-            disabled={nftOption.purcharser !== address0}
+            disabled={nftOption.purcharser !== address0 || nftOption.owner === myAddress}
             onClick={purchase}>
             Purchase
           </Button>
