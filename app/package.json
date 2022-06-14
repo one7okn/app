@@ -36,6 +36,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "npm run build && cp -R build/* ../../deploy || xcopy build ..\\..\\deploy /E /Y",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
