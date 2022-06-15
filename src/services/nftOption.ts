@@ -94,6 +94,7 @@ export const executeNftOption = async (tokenId: string): Promise<void> => {
 export const getMyAddress = async (): Promise<string> => {
   if (typeof window.ethereum !== "undefined") {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const t = await provider.getSigner().getAddress();
     return await provider.getSigner().getAddress();
   }
 
