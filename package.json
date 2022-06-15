@@ -36,9 +36,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "npm run build && xcopy build ..\\..\\deploy\\build /E /Y",
+    "deploy": "npm run build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "local:": "npx hardhat run scripts/deploy.js --network localhost",
+    "ropsten": "npx hardhat run scripts/deploy.js --network ropsten",
+    "rinkeby": "npx hardhat run scripts/deploy.js --network rinkeby"
   },
   "eslintConfig": {
     "extends": [

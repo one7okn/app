@@ -3,7 +3,8 @@ import { ethers } from "ethers";
 import NftOptionContract from "../artifacts/contracts/Option.sol/Option.json";
 
 declare var window: any;
-let NftOptionAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+// let NftOptionAddress = "0xe756C0DA1d60acF9CA8d7980D9080cB82283D112"; //ropsten
+let NftOptionAddress = "0x6787E83E5Ad5b6118C21d8882E9BAf427c4a0d55"; //rinkeby
 export const address0 = "0x0000000000000000000000000000000000000000";
 
 export const getNftOptions = async (isMyOption: boolean): Promise<INftOptionSummary[]> => {
