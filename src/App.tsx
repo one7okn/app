@@ -1,26 +1,24 @@
-import React from "react";
-import logo from "./logo.svg";
+import { FC } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.scss";
+import { NftOptionList } from "./nft-option/pages/list";
+import { Header } from "./shared/components";
 
-function App() {
+export const App: FC = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Routes>
+        <Route path="/" element={<NftOptionList />} />
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>There's nothing here!</p>
+            </main>
+          }
+        />
+      </Routes>
     </div>
   );
-}
-
-export default App;
+};
