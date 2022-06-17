@@ -49,7 +49,7 @@ export const NftOptionCreate: FC<NftOptionCreateProps> = (props) => {
         );
       } else throwError(r);
     });
-  }, [throwError]);
+  }, [myAddress, throwError]);
 
   const openDialog = () => {
     setOpen(true);

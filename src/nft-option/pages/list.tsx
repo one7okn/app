@@ -2,16 +2,17 @@ import { FormControlLabel, Grid, Switch, Toolbar } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 import { NftOptionCard, NftOptionCreate } from '../components';
 import { INftOptionSummary } from '../models';
-import { getMyAddress, getNftOptions } from '../service';
+import { getNftOptions } from '../service';
 
-export const NftOptionList: FC = () => {
+export interface NftOptionListProp {
+  myAddress: string;
+}
+
+export const NftOptionList: FC<NftOptionListProp> = (props) => {
+  const { myAddress } = props;
+
   const [nftOptions, setNftOptions] = useState<INftOptionSummary[]>([]);
-  const [myAddress, setMyAddress] = useState('');
   const [isMyOption, setIsMyOption] = useState<boolean>(false);
-
-  useEffect(() => {
-    getMyAddress().then((myAddress) => setMyAddress(myAddress));
-  }, []);
 
   useEffect(() => {
     fetchData();
