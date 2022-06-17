@@ -103,6 +103,7 @@ export const getMyAddress = async (): Promise<string> => {
 };
 
 export const getMyNftCollections = async (myAddress: string): Promise<RequestResponse<any[]>> => {
+  if (myAddress === '') return { isSuccess: true, content: [], status: 0 };
   return await httpGet(`https://api.opensea.io/api/v1/collections?asset_owner=${myAddress}`);
 };
 
