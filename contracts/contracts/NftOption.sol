@@ -18,7 +18,7 @@ contract NftOption is ERC721Enumerable, Ownable {
         string urlNftOption;
         string urlNftImage;
         uint256 strikePrice;
-        uint256 amount;
+        uint256 premium;
         uint256 expirationDate;
         address purcharser;
     }
@@ -35,8 +35,8 @@ contract NftOption is ERC721Enumerable, Ownable {
                 "toto",
                 "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
                 "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
-                50,
-                1,
+                50 * 10**18,
+                1 * 10**18,
                 block.timestamp + 30 days,
                 address(0)
             )
@@ -49,8 +49,8 @@ contract NftOption is ERC721Enumerable, Ownable {
                 "toto",
                 "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
                 "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
-                50,
-                1,
+                50 * 10**18,
+                1 * 10**18,
                 block.timestamp + 30 days,
                 address(0)
             )
@@ -63,8 +63,8 @@ contract NftOption is ERC721Enumerable, Ownable {
                 "toto",
                 "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
                 "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
-                50,
-                1,
+                50 * 10**18,
+                1 * 10**18,
                 block.timestamp + 30 days,
                 0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199
             )
@@ -77,8 +77,8 @@ contract NftOption is ERC721Enumerable, Ownable {
                 "toto",
                 "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
                 "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
-                50,
-                1,
+                50 * 10**18,
+                1 * 10**18,
                 block.timestamp + 30 days,
                 0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199
             )
@@ -91,8 +91,8 @@ contract NftOption is ERC721Enumerable, Ownable {
                 "toto",
                 "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
                 "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
-                50,
-                1,
+                50 * 10**18,
+                1 * 10**18,
                 block.timestamp + 30 days,
                 0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199
             )
@@ -105,8 +105,8 @@ contract NftOption is ERC721Enumerable, Ownable {
                 "toto",
                 "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
                 "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
-                50,
-                1,
+                50 * 10**18,
+                1 * 10**18,
                 block.timestamp + 30 days,
                 0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199
             )
@@ -119,8 +119,8 @@ contract NftOption is ERC721Enumerable, Ownable {
                 "toto",
                 "https://testnets.opensea.io/assets/rinkeby/0x388F486dBcBe05029bA7adF784459B580b427032/12",
                 "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/b6/Amazing_Spider-Man_-_Profile_Pic.png",
-                50,
-                1,
+                50 * 10**18,
+                1 * 10**18,
                 block.timestamp + 30 days,
                 0x8626f6940E2eb28930eFb4CeF49B2d1F2C9C1199
             )

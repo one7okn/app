@@ -32,18 +32,16 @@ const config: HardhatUserConfig = {
       chainId: 1337,
     },
     ropsten: {
-      url: process.env.ROPSTEN_URL || "",
-      accounts:
-        process.env.ROPSTEN_PRIVATE_KEY !== undefined
-          ? [process.env.ROPSTEN_PRIVATE_KEY]
-          : [],
+      url: "https://ropsten.infura.io/v3/28cae95d6ac146cc99d929b09eb22d7f",
+      accounts: [
+        "0x5a28d975ee2b9f892fdc0de8802417b2841a8b2e1eb576355bc9d5d7a47c2be0",
+      ],
     },
     rinkeby: {
-      url: process.env.RINKEBY_URL || "",
-      accounts:
-        process.env.RINKEBY_PRIVATE_KEY !== undefined
-          ? [process.env.RINKEBY_PRIVATE_KEY]
-          : [],
+      url: "https://rinkeby.infura.io/v3/28cae95d6ac146cc99d929b09eb22d7f",
+      accounts: [
+        "0x14117252e729898cdb600807c5dff2c38c1bc771a875e8533c3f7474733522f4",
+      ],
     },
   },
 };
