@@ -10,13 +10,12 @@ export interface NftOptionListProp {
 
 export const NftOptionList: FC<NftOptionListProp> = (props) => {
   const { myAddress } = props;
-
   const [nftOptions, setNftOptions] = useState<INftOptionSummary[]>([]);
   const [isMyOption, setIsMyOption] = useState<boolean>(false);
 
   useEffect(() => {
     fetchData();
-  }, [isMyOption]);
+  }, [isMyOption, myAddress]);
 
   async function fetchData() {
     const nftOptionSummaries: INftOptionSummary[] = await getNftOptions(isMyOption);
