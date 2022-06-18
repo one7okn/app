@@ -122,10 +122,10 @@ export const NftOptionCreate: FC<NftOptionCreateProps> = (props) => {
   return (
     <>
       <Button variant="contained" onClick={openDialog}>
-        Create Option
+        Mint New Option
       </Button>
       <Dialog open={open} onClose={closeDialog} fullWidth={true}>
-        <DialogTitle>Create a put option</DialogTitle>
+        <DialogTitle>Mint a Put Option</DialogTitle>
         <DialogContent>
           <Stack component="form" noValidate spacing={2} paddingTop="20px">
             <FormControl variant="standard" required error={isSubmit && nftOption.collection === ''}>
@@ -144,7 +144,7 @@ export const NftOptionCreate: FC<NftOptionCreateProps> = (props) => {
             <Stack direction="row" justifyContent="space-between" spacing={2}>
               <TextField
                 variant="filled"
-                label="Strike price (eth)"
+                label="Strike Price (ETH)"
                 value={nftOption.strikePrice}
                 name="strikePrice"
                 required
@@ -158,7 +158,7 @@ export const NftOptionCreate: FC<NftOptionCreateProps> = (props) => {
                 }}
                 fullWidth
               />
-              <TextField variant="filled" label="Floor price (eth)" value={nftOption.floorPrice} disabled />
+              <TextField variant="filled" label="Floor Price (ETH)" value={nftOption.floorPrice} disabled />
             </Stack>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DatePicker
@@ -173,12 +173,12 @@ export const NftOptionCreate: FC<NftOptionCreateProps> = (props) => {
             </LocalizationProvider>
             <Alert severity="info" variant="outlined">
               <AlertTitle>Premium</AlertTitle>
-              The premium is <strong>{nftOption.premium}</strong> ether.
+              The premium is <strong>{nftOption.premium}</strong> ETH.
             </Alert>
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button onClick={save}>Buy</Button>
+          <Button onClick={save}>Mint</Button>
           <Button onClick={closeDialog}>Cancel</Button>
         </DialogActions>
       </Dialog>

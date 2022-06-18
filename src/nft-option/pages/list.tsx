@@ -30,7 +30,7 @@ export const NftOptionList: FC<NftOptionListProp> = (props) => {
   return (
     <>
       <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', backgroundColor: 'transparent' }}>
-        <FormControlLabel control={<Switch onChange={myOptionChange} />} label="My Option" />
+        <FormControlLabel control={<Switch onChange={myOptionChange} />} label="My Options" />
         <NftOptionCreate fetchData={fetchData} myAddress={myAddress} />
       </Toolbar>
       <div></div>
