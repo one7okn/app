@@ -1,9 +1,9 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.scss';
 import { NftOptionList } from './nft-option/pages/list';
 import { Header } from './shared/components';
-import { WagmiConfig, createClient, useAccount } from 'wagmi';
+import { WagmiConfig, createClient } from 'wagmi';
 
 const client = createClient();
 

@@ -5,10 +5,6 @@ import './header.scss';
 import { FC } from 'react';
 import { Profile } from '.';
 
-export interface HeaderProp {
-  myAddress: string;
-}
-
 export const Header: FC = () => {
   return (
     <AppBar position="sticky" className="AppBar">
