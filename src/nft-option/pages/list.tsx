@@ -1,25 +1,31 @@
 import { FormControlLabel, Grid, Switch, Toolbar } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
+import { useAccount } from 'wagmi';
 import { NftOptionCard, NftOptionCreate } from '../components';
 import { INftOptionSummary } from '../models';
 import { getNftOptions } from '../service';
 
-export interface NftOptionListProp {
-  myAddress: string;
-}
-
-export const NftOptionList: FC<NftOptionListProp> = (props) => {
-  const { myAddress } = props;
+export const NftOptionList: FC = () => {
+  const { data: account } = useAccount();
   const [nftOptions, setNftOptions] = useState<INftOptionSummary[]>([]);
   const [isMyOption, setIsMyOption] = useState<boolean>(false);
+  const [myAddress, setMyAddress] = useState<string>('');
+
+  useEffect(() => {
+    setMyAddress(account?.address || '');
+  }, [account]);
 
   useEffect(() => {
     fetchData();
   }, [isMyOption, myAddress]);
 
   async function fetchData() {
-    const nftOptionSummaries: INftOptionSummary[] = await getNftOptions(isMyOption);
-    setNftOptions(nftOptionSummaries);
+    if (account?.address) {
+      const nftOptionSummaries: INftOptionSummary[] = await getNftOptions(isMyOption);
+      setNftOptions(nftOptionSummaries);
+    } else {
+      setNftOptions([]);
+    }
   }
 
   const myOptionChange = (): void => {
@@ -32,8 +38,7 @@ export const NftOptionList: FC<NftOptionListProp> = (props) => {
         <FormControlLabel control={<Switch onChange={myOptionChange} />} label="My Options" />
         <NftOptionCreate fetchData={fetchData} myAddress={myAddress} />
       </Toolbar>
-      <div></div>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} bgcolor="black">
         {nftOptions.map((nftOption: INftOptionSummary) => {
           return (
             <NftOptionCard nftOption={nftOption} myAddress={myAddress} fetchData={fetchData} key={nftOption.tokenId} />
