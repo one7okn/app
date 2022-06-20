@@ -5,8 +5,8 @@ import { httpGet } from '../shared/services';
 import { INftOptionSummary, NftOption } from './models';
 
 declare var window: any;
-let NftOptionAddress = '0xd828E4692c6bbaFB3c5Be3d02743D107F0f62592'; //ropsten
-// let NftOptionAddress = '0x6787E83E5Ad5b6118C21d8882E9BAf427c4a0d55'; //rinkeby
+let NftOptionAddress = '0xafFAF919A146C8bDB421Ede20ef67eDf59885012'; //ropsten
+// let NftOptionAddress = '0x92BF445B012fe25dff2F7aa99abc4987BC6207f8'; //rinkeby
 // let NftOptionAddress = '0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6';
 export const address0 = '0x0000000000000000000000000000000000000000';
 
