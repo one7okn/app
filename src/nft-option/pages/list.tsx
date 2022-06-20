@@ -17,6 +17,7 @@ export const NftOptionList: FC = () => {
 
   useEffect(() => {
     fetchData().then();
+    // eslint-disable-next-line
   }, [isMyOption, myAddress]);
 
   async function fetchData() {

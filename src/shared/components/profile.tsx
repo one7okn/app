@@ -14,6 +14,18 @@ export const Profile: FC = () => {
     return `${account?.address?.substr(0, 5)}...${account?.address?.substr(account?.address?.length - 4)}`;
   }
 
+  function connectWallet() {
+    //Si tu es sur un mobile mais pas sur Metamask browser
+    if (('ontouchstart' in window || 'onmsgesturechange' in window) && typeof window.ethereum === 'undefined') {
+      const link = window.open('https://metamask.app.link/dapp/app.one7okn.wtf/', '_blank');
+      setTimeout(function () {
+        link?.close();
+      }, 5000);
+    }
+
+    connect(connector);
+  }
+
   if (account) {
     return (
       <Button variant="outlined" onClick={() => disconnect()}>
@@ -29,14 +41,11 @@ export const Profile: FC = () => {
   }
 
   return (
-    <Button variant="outlined" disabled={!connector.ready} onClick={() => connect(connector)}>
-      <Tooltip title={`Connect ${connector.name}`}>
-        <span>
-          Connect
-          {!connector.ready && ' (unsupported)'}
-          {isConnecting && connector.id === pendingConnector?.id && 'ing'}
-        </span>
-      </Tooltip>
+    <Button variant="outlined" onClick={connectWallet}>
+      <span>
+        Connect
+        {isConnecting && connector.id === pendingConnector?.id && 'ing'}
+      </span>
     </Button>
   );
 };
