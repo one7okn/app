@@ -130,11 +130,12 @@ export const NftOptionCreate: FC<NftOptionCreateProps> = (props) => {
           <Stack component="form" noValidate spacing={2} paddingTop="20px">
             <FormControl variant="standard" required error={isSubmit && nftOption.collection === ''}>
               <InputLabel>Collection</InputLabel>
-              <Select name="collection" defaultValue={{}} onChange={selectChange}>
+              <Select name="collection" defaultValue="" onChange={selectChange}>
                 {myNftCollections.map((myNftCollection: IMyNftCollections) => {
                   return (
                     <MenuItem value={myNftCollection as any} key={myNftCollection.collection}>
-                      <img height="50px" src={myNftCollection.urlNftImage}></img>&nbsp;
+                      <img height="50px" src={myNftCollection.urlNftImage} alt={myNftCollection.collectionName}></img>
+                      &nbsp;
                       {myNftCollection.collectionName}
                     </MenuItem>
                   );
