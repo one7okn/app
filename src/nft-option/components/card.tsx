@@ -25,7 +25,7 @@ export interface NftOptionProp {
 export const NftOptionCard: FC<NftOptionProp> = (props) => {
   const { nftOption, myAddress, fetchData } = props;
 
-  const purchase = async (e: any) => {
+  const underwrite = async (e: any) => {
     e.preventDefault();
     await purchaseNftOption(nftOption.tokenId);
     fetchData();
@@ -83,7 +83,7 @@ export const NftOptionCard: FC<NftOptionProp> = (props) => {
             fullWidth={true}
             disabled={nftOption.purcharser === address0 || nftOption.owner !== myAddress}
             onClick={execute}>
-            Underwrite
+            Execute
           </Button>
           <Button
             size="small"
@@ -91,8 +91,8 @@ export const NftOptionCard: FC<NftOptionProp> = (props) => {
             variant="contained"
             fullWidth={true}
             disabled={nftOption.purcharser !== address0 || nftOption.owner === myAddress}
-            onClick={purchase}>
-            Purchase
+            onClick={underwrite}>
+            Underwrite
           </Button>
         </CardActions>
       </Card>
