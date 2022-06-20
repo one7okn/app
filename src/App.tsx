@@ -1,15 +1,15 @@
 import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import './App.scss';
 import { NftOptionList } from './nft-option/pages/list';
 import { Header } from './shared/components';
 import { WagmiConfig, createClient } from 'wagmi';
+import { Box } from '@mui/material';
 
 const client = createClient();
 
 export const App: FC = () => {
   return (
-    <div className="App">
+    <Box height="100vh" sx={{ backgroundColor: '#000000' }}>
       <WagmiConfig client={client}>
         <Header />
         <Routes>
@@ -24,6 +24,6 @@ export const App: FC = () => {
           />
         </Routes>
       </WagmiConfig>
-    </div>
+    </Box>
   );
 };
