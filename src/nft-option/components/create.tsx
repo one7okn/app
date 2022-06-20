@@ -171,14 +171,16 @@ export const NftOptionCreate: FC<NftOptionCreateProps> = (props) => {
                 )}
               />
             </LocalizationProvider>
-            <Alert severity="info" variant="outlined">
+            <Alert severity={nftOption.premium < 0 ? 'error' : 'info'} variant="outlined">
               <AlertTitle>Premium</AlertTitle>
-              The premium is <strong>{nftOption.premium}</strong> ETH.
+              The premium is {nftOption.premium < 0 && 'not valid'} <strong>{nftOption.premium}</strong> ETH.
             </Alert>
           </Stack>
         </DialogContent>
         <DialogActions>
-          <Button onClick={save}>Mint</Button>
+          <Button onClick={save} disabled={nftOption.premium < 0}>
+            Mint
+          </Button>
           <Button onClick={closeDialog}>Cancel</Button>
         </DialogActions>
       </Dialog>
