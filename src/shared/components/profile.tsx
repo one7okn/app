@@ -1,4 +1,4 @@
-import { Avatar, Button, Hidden, Stack, Tooltip } from '@mui/material';
+import { Avatar, Box, Button, Stack, Tooltip } from '@mui/material';
 import { FC } from 'react';
 import { useAccount, useConnect, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi';
 
@@ -6,7 +6,7 @@ export const Profile: FC = () => {
   const { data: account } = useAccount();
   const { data: ensAvatar } = useEnsAvatar({ addressOrName: account?.address });
   const { data: ensName } = useEnsName({ address: account?.address });
-  const { connect, connectors, error, isConnecting, pendingConnector } = useConnect();
+  const { connect, connectors, isConnecting, pendingConnector } = useConnect();
   const { disconnect } = useDisconnect();
   const connector = connectors[0];
 
@@ -19,15 +19,9 @@ export const Profile: FC = () => {
       <Button variant="outlined" onClick={() => disconnect()}>
         <Tooltip title={`Disconnect ${connector.name}`}>
           <Stack direction="row" spacing={1}>
-            <Hidden only="xs">
-              <Avatar src={ensAvatar || ''} sx={{ width: 24, height: 24 }}>
-                {ensName?.substring(0, 1).toUpperCase() || ''}
-              </Avatar>
-            </Hidden>
+            <Avatar src={ensAvatar || ''} sx={{ width: 24, height: 24, display: { xs: 'none', sm: 'block' } }}></Avatar>
             <span>{ensName ? ensName : GetAddress()}</span>
-            <Hidden only="xs">
-              <span>{ensName ? `(${GetAddress()})` : ''}</span>
-            </Hidden>
+            <Box sx={{ display: { xs: 'none', sm: 'block' } }}>{ensName ? `(${GetAddress()})` : ''}</Box>
           </Stack>
         </Tooltip>
       </Button>

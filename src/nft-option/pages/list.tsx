@@ -16,16 +16,11 @@ export const NftOptionList: FC = () => {
   }, [account]);
 
   useEffect(() => {
-    fetchData();
+    fetchData().then();
   }, [isMyOption, myAddress]);
 
   async function fetchData() {
-    if (account?.address) {
-      const nftOptionSummaries: INftOptionSummary[] = await getNftOptions(isMyOption);
-      setNftOptions(nftOptionSummaries);
-    } else {
-      setNftOptions([]);
-    }
+    setNftOptions(myAddress ? await getNftOptions(isMyOption) : []);
   }
 
   const myOptionChange = (): void => {
@@ -34,10 +29,12 @@ export const NftOptionList: FC = () => {
 
   return (
     <>
-      <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', backgroundColor: 'transparent' }}>
-        <FormControlLabel control={<Switch onChange={myOptionChange} />} label="My Options" />
-        <NftOptionCreate fetchData={fetchData} myAddress={myAddress} />
-      </Toolbar>
+      {myAddress && (
+        <Toolbar sx={{ display: 'flex', justifyContent: 'flex-end', backgroundColor: 'transparent' }}>
+          <FormControlLabel control={<Switch onChange={myOptionChange} />} label="My Options" />
+          <NftOptionCreate fetchData={fetchData} myAddress={myAddress} />
+        </Toolbar>
+      )}
       <Grid container spacing={2} bgcolor="black">
         {nftOptions.map((nftOption: INftOptionSummary) => {
           return (
